@@ -25,7 +25,6 @@ const Page = () => {
     fetchData();
   }, []);
 
-  // Xatolikni tuzatish: el: any -> el: CartType
   const newCarts = carts?.filter((el: CartType) => el.userId === Number(id));
 
   if (isLoading) {
