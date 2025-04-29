@@ -3,7 +3,7 @@ import { CartType } from "@/interfaces";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
-const page = () => {
+const Page = () => {
   const { cartId } = useParams();
   const [cart, setCart] = useState<CartType>();
   const [year, setYear] = useState<number>();
@@ -66,4 +66,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

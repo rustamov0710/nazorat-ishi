@@ -2,7 +2,7 @@ import User from '@/components/User'
 import { UserType } from '@/interfaces'
 import React from 'react'
 
-const page = async() => {
+const Page = async() => {
     const res = await fetch('https://fakestoreapi.com/users')
     if(!res.ok)throw new Error('failed to fetch users')
       const users: UserType[] = await res.json()
@@ -19,4 +19,4 @@ const page = async() => {
   )
 }
 
-export default page
+export default Page
