@@ -7,15 +7,31 @@ import React, { useEffect, useState } from "react";
 const page = () => {
   const { id } = useParams();
   const [user, setUser] = useState<UserType>();
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`https://fakestoreapi.com/users/${id}`);
-      if (!res.ok) throw new Error("failed to fetch user");
-      const data = await res.json();
-      setUser(data);
+      try {
+        const res = await fetch(`https://fakestoreapi.com/users/${id}`);
+        if (!res.ok) throw new Error("Failed to fetch user");
+        const data = await res.json();
+        setUser(data);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchData();
-  }, []);
+  }, [id]);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+      <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+    );
+  }
 
   return (
     <div className="flex">
@@ -57,12 +73,6 @@ const page = () => {
           Carts
         </Link>
       </div>
-      {/* <iframe
-        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2384.2421247648873!2d-0.1277582!3d51.5073509!3m2!1i1024!2i768!4f13.1"
-        width="600"
-        height="450"
-        aria-hidden="false"
-      ></iframe> */}
     </div>
   );
 };
